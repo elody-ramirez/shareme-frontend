@@ -1,13 +1,33 @@
 import { useNavigate } from 'react-router-dom'
 import { GoogleLogin, googleLogout } from '@react-oauth/google'
+import jwt_decode from 'jwt-decode'
 import { FcGoogle } from 'react-icons/fc'
 import shareVideo from '../assets/share.mp4'
 import logo from '../assets/logowhite.png'
 
+import { client } from '../client'
+
 const Login = () => {
+  const navigate = useNavigate()
 
   const responseGoogle = (response) => {
-    console.log(response)
+    // localStorage.setItem('user', JSON.stringify(response))
+
+    const decoded = jwt_decode(response.credential)
+
+    const { name, picture, sub } = decoded
+    
+    const user = {
+      _id: sub,
+      _type: 'user',
+      userName: name,
+      image: picture
+    }
+
+    client.createIfNotExists(user)
+      .then(() => {
+        navigate('/', { replace: true })
+      })
   }
 
   return (
@@ -29,8 +49,7 @@ const Login = () => {
           </div>
 
           <div className="shadow-2xl">
-            <GoogleLogin 
-              clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}
+            <GoogleLogin
               render={(renderProps) => (
                 <button
                   type="button"
