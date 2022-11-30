@@ -33,7 +33,7 @@ const Sidebar = ({ user, closeToggle }) => {
         <div className="flex flex-col gap-5">
           <NavLink
             to="/"
-            className={({ isActive }) => isActive ? isActiveStyle: isNotActiveStyle}
+            className={({ isActive }) => (isActive ? isActiveStyle: isNotActiveStyle)}
             onClick={handleCloseSidebar}
           >
             <RiHomeFill />
@@ -43,7 +43,7 @@ const Sidebar = ({ user, closeToggle }) => {
           {categories.slice(0, categories.length -1).map((category) => (
             <NavLink
               to={`/category/${category.name}`}
-              className={({ isActive }) => isActive ? isActiveStyle: isNotActiveStyle}
+              className={({ isActive }) => (isActive ? isActiveStyle: isNotActiveStyle)}
               onClick={handleCloseSidebar}
               key={category.name}
             >
