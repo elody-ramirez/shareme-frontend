@@ -24,6 +24,7 @@ const Home = () => {
       .then((data) => {
         setUser(data[0])
       })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
