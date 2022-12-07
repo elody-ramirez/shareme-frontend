@@ -13,7 +13,6 @@ const Spinner = ({ message }) => {
       />
 
       <p className="text-lg text-center px-2">{message}</p>
-      <h2>test</h2>
     </div>
   )
 }
